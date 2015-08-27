@@ -1,5 +1,5 @@
 import java.io.*;
-//test the github's work
+//no more test
 
 public class Assi0 {
 	
