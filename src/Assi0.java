@@ -3,30 +3,40 @@ import java.io.*;
 
 public class Assi0 {
 	
-	public static void readTextfile(String[] args){
+	public static void main(String[] args){
 		
-		FileInputStream fis = null;
-		
-		BufferedReader br = null;
-		InputStreamReader isr = null;
 		String savedWord[] = new String[60];
 		int number[] = new int[60];
+		for(int i=0;i<60;i++)
+		{
+			savedWord[i]="";
+			number[i]=0;
+		}
+
+		String filename = "plain.txt";
+			
+		
+		String str = "";
+		String str1 = "";
 		try{
-			FileReader fr = new FileReader("File.txt");
-			String str = "";
-			String str1 = "";
-			fis = new FileInputStream("C:\\plain.txt");
-			isr = new InputStreamReader(fis);
-			//isr = new FileInputStream(new File("D:/text.txt"));
-			br = new BufferedReader(isr);
-			//br = new BufferedReader(new FileReader("Test.txt"));
-			while((str=br.readLine())!=null){
-				String temp[] = str.split(" '| |!| \" ");
-				for(int i=0;i<60;i++){
-					
-				
-					if(temp[0] != savedWord[0]){
-					
+			
+			//File file = new File("F:/plain.txt");
+			FileReader fr = new FileReader(filename);
+			//fis = new FileInputStream("F:/plain.txt");
+			BufferedReader br = new BufferedReader(fr);
+			
+			while((str=br.readLine())!=null)
+			{
+				String temp[] = str.split(" \n | \\. | ! | \" ");
+				for(int i=0;i<temp.length;i++)
+				{
+					for(int j=0;j<savedWord.length;j++)
+					{
+							if(temp[i] != savedWord[j])
+							{
+								savedWord[i] = temp[i];
+								number[i]++;
+							}
 					}
 				}
 				
@@ -34,24 +44,17 @@ public class Assi0 {
 			
 			}
 			System.out.println(str1);
-		} catch(FileNotFoundException e){
-			System.out.println("Cannot find file");
-		} catch(IOException e){
-			System.out.println("Error");
+		
+			br.close();
+			
+			
+		} catch(FileNotFoundException e)
+		{
+			e.printStackTrace();
+			System.out.println("Unable to open file " );     
+		} catch(IOException e) {
+			e.printStackTrace();
 		}
-		finally{
-			try{
-				br.close();
-				isr.close();
-				fis.close();
-			} catch(IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-	}	
-	
-	public static void main(String[] args){
 		
 	}
 }
